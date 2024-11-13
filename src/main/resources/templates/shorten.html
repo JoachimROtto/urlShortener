@@ -1,0 +1,11 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="">
+<head>
+</head>
+<body>
+<h1>URL abkürzen</h1>
+<form action="#" th:action="@{/shortenui/add}" th:object="${formdata}" method="post">
+<p>URL: <input type="text" th:field="*{text}" /></p>
+    <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+</form>
+</body>
+</html>

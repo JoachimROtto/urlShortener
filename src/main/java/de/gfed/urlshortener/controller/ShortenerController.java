@@ -25,12 +25,7 @@ public class ShortenerController {
         this.repo=repo;
     }
 
-    @CrossOrigin @PostMapping(path ="/shortenweb")
-    String requestShortenerWeb( @RequestBody Message url){
-        return getOrCreateShortener(url.text()).getShortID();
-    }
-
-    @PostMapping(path ="/shorten")
+    @CrossOrigin @PostMapping(path ="/shorten")
     String requestShortener(@RequestBody Message url){
         return getOrCreateShortener(url.text()).getShortID();
     }
@@ -38,11 +33,6 @@ public class ShortenerController {
     @CrossOrigin @GetMapping("/{id}")
     String targetUrl(@PathVariable String id){
         return getForwarding(id,true);
-    }
-
-    @CrossOrigin @GetMapping("/getURL/{id}")
-    String targetUrlforAPIRequest(@PathVariable String id){
-        return getForwarding(id,false);
     }
 
     @RequestMapping(value="/shortenui/add", method= RequestMethod.POST)

@@ -2,6 +2,7 @@ package de.gfed.urlshortener.controller;
 import de.gfed.urlshortener.model.FormData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.ui.Model;
 import de.gfed.urlshortener.model.Shortener;
 import de.gfed.urlshortener.model.ShortenerRepository;
@@ -31,8 +32,18 @@ public class ShortenerController {
     }
 
     @CrossOrigin @GetMapping("/{id}")
-    String targetUrl(@PathVariable String id){
+    String getForwarding(@PathVariable String id){
         return getForwarding(id,true);
+    }
+
+    @CrossOrigin @GetMapping("/getID/{id}")
+    String getTargetURL(@PathVariable String id){
+        return getForwarding(id,false);
+    }
+
+    @CrossOrigin @GetMapping(value = "/getURL/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    Message getTargetURLAsJSON(@PathVariable String id){
+        return new Message(getForwarding(id,false));
     }
 
     @RequestMapping(value="/shortenui/add", method= RequestMethod.POST)
